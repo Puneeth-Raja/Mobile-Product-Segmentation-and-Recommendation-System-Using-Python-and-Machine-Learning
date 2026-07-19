@@ -138,14 +138,7 @@ Then open the local URL Streamlit prints (defaults to `http://localhost:8501`).
 
 **Overall:** the project covers every stage of the brief's pipeline. The only deliberate deviation is the cluster count (K=3 instead of the brief's illustrative K=4) — the brief explicitly labels 4 as "for example only," and the choice here is backed by an elbow plot and silhouette comparison, which is arguably stronger evidence than fixing K in advance.
 
-## 11. Known Limitations / Suggested Polish
-
-- The dataset files in `Dataset/` are CSV content saved with an `.xls` extension — works today, but renaming to `.csv` would avoid confusion.
-- `requirements.txt` doesn't include `matplotlib`/`seaborn`, which the notebooks (not the app) depend on — worth adding for full reproducibility.
-- Preprocessing and recommendation logic live in notebooks plus `app.py` rather than separate standalone `.py` scripts — fine for this format, but could be refactored into a `src/` module if the project grows.
-- Recommendation relevance is validated with a spot-check example rather than a formal metric (e.g., average intra-cluster similarity) — a nice-to-have enhancement, not a gap in the brief.
-
-## 12. Future Improvements
+## 11. Future Improvements
 
 - Add a trained/learned recommendation model as an alternative to pure similarity ranking.
 - Side-by-side phone comparison view.
