@@ -189,13 +189,18 @@ if submitted:
     if brand_value != 'Any' and brand_value in recommendations.columns:
         recommendations = recommendations[recommendations[brand_value] == 1]
 
-    recommendations = recommendations.sort_values('Similarity Score', ascending=False).head(top_n)
+    recommendations = recommendations[recommendations['price_usd'] <= budget_value]
+
+    recommendations = recommendations.sort_values(
+        ['Similarity Score', 'price_usd'],
+        ascending=[False, True],
+    ).head(top_n)
 
     st.markdown("### Recommended Products")
     st.caption("These matches are ranked by similarity to the preferences you filled in.")
 
     if recommendations.empty:
-        st.warning("No products matched the current filters. Try relaxing the brand preference or adjusting the feature sliders.")
+        st.warning("No products matched the current filters within your budget. Try increasing the budget or relaxing the feature sliders.")
     else:
         top_pick = recommendations.iloc[0]
         col1, col2, col3 = st.columns(3)
